@@ -11,9 +11,20 @@ class UpdateUserLastActivity
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            Auth::user()->update(['last_activity' => now()]);
+            $user = Auth::user();
+            $currentIp = $request->ip();
+            
+            // Update both timestamp and IP if changed
+            if ($user->ip_address !== $currentIp) {
+                $user->update([
+                    'last_activity' => now(),
+                    'ip_address' => $currentIp
+                ]);
+            } else {
+                $user->update(['last_activity' => now()]);
+            }
         }
-
+        
         return $next($request);
     }
 }

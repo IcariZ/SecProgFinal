@@ -21,7 +21,8 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
-        'last_activity', // Add this line
+        'last_activity',
+        'ip_address',  // Add this line
     ];
 
     /**
