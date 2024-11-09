@@ -110,7 +110,7 @@ class UserList extends Component
         $lifetime = config('session.lifetime', 120);
         
         // Calculate remaining time
-        $lastActivity = session()->get('last_activity');
+        $lastActivity = $user->last_activity ? strtotime($user->last_activity) : null;
         if (!$lastActivity) {
             return 'Session expired';
         }
