@@ -26,6 +26,18 @@ class Show extends Component
 
     public function mount()
     {
+        // Check if user has already taken this quiz
+        if (auth()->check()) {
+            $hasAttempted = Test::where('quiz_id', $this->quiz->id)
+                               ->where('user_id', auth()->id())
+                               ->exists();
+            
+            if ($hasAttempted) {
+                session()->flash('error', 'You have already taken this quiz. You can only take it once.');
+                return redirect()->route('home');
+            }
+        }
+
         $this->startTimeInSeconds = now()->timestamp;
 
         $this->questions = Question::query()
