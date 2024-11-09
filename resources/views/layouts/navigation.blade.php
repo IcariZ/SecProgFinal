@@ -82,6 +82,9 @@
                             <x-dropdown-link :href="route('admins')">
                                 Admins
                             </x-dropdown-link>
+                            <x-dropdown-link :href="route('users')">
+                                Users
+                            </x-dropdown-link>
                             <x-dropdown-link :href="route('questions')">
                                 Questions
                             </x-dropdown-link>
@@ -134,6 +137,12 @@
                 </x-slot>
 
                 <x-slot name="content">
+                    <x-dropdown-link :href="route('admins')">
+                        Admins
+                    </x-dropdown-link>
+                    <x-dropdown-link :href="route('users')">
+                        Users
+                    </x-dropdown-link>
                     <x-dropdown-link :href="route('questions')">
                         Questions
                     </x-dropdown-link>
