@@ -125,7 +125,7 @@ class UserList extends Component
         // Convert to minutes and seconds
         $minutes = floor($remainingSeconds / 60);
         $seconds = $remainingSeconds % 60;
-        
+
         return "{$minutes}m {$seconds}s";
     }
 
