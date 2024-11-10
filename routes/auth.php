@@ -40,20 +40,15 @@ Route::middleware('guest')->group(function () {
 
     Route::get('auth/{provider}/callback', [SocialiteController::class, 'callbackSocial'])
         ->name('socialite.callback');
+
+    Route::get('verify-2fa', function () {
+        return view('auth.verify-2fa');
+    })->name('verify.2fa');
+
+    Route::post('verify-2fa', [RegisteredUserController::class, 'verify2FA']);
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('verify-email', EmailVerificationPromptController::class)
-                ->name('verification.notice');
-
-    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
-                ->middleware(['signed', 'throttle:6,1'])
-                ->name('verification.verify');
-
-    Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-                ->middleware('throttle:6,1')
-                ->name('verification.send');
-
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
                 ->name('password.confirm');
 

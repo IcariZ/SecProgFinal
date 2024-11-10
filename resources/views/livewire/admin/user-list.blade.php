@@ -33,6 +33,9 @@
                                         <span class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500">IP Address</span>
                                     </th>
                                     <th class="bg-gray-50 px-6 py-3 text-left">
+                                        <span class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500">Status</span>
+                                    </th>
+                                    <th class="bg-gray-50 px-6 py-3 text-left">
                                         <span class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500">Actions</span>
                                     </th>
                                 </tr>
@@ -65,6 +68,13 @@
                                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                                             {{ $user->ip_address ?? 'Not recorded' }}
                                         </td>
+                                        <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
+                                            @if($this->isUserOnline($user))
+                                                <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Online</span>
+                                            @else
+                                                <span class="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800">Offline</span>
+                                            @endif
+                                        </td>
                                         <td class="px-6 py-4 text-sm leading-5 whitespace-no-wrap">
                                             @if($editingUserId === $user->id)
                                                 <button wire:click="saveUsername"
@@ -89,7 +99,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6" class="px-6 py-4 text-center leading-5 text-gray-900 whitespace-no-wrap">
+                                        <td colspan="7" class="px-6 py-4 text-center leading-5 text-gray-900 whitespace-no-wrap">
                                             No users were found.
                                         </td>
                                     </tr>

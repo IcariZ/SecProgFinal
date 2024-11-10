@@ -129,6 +129,16 @@ class UserList extends Component
         return "{$minutes}m {$seconds}s";
     }
 
+    public function isUserOnline(User $user): bool
+    {
+        if (!$user->last_activity) {
+            return false;
+        }
+        
+        // Consider user online if activity within last 5 minutes
+        return $user->last_activity >= now()->subMinutes(5);
+    }
+
     public function getListeners()
     {
         return [
