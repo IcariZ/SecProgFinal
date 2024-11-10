@@ -58,5 +58,6 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Auth::routes(['verify' => true]);
 
 require __DIR__ . '/auth.php';

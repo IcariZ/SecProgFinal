@@ -55,7 +55,7 @@ class RegisteredUserController extends Controller
         return redirect()->route('verify.2fa')->with('email', $user->email);
     }
 
-    public function verify2FA(Request $request) 
+    public function verify2FA(Request $request): RedirectResponse
     {
         $request->validate([
             'two_factor_token' => 'required|string',
