@@ -21,8 +21,16 @@
 
         <div>
             <x-input-label for="password" :value="__('New Password')" />
-            <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+            <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" oninput="validatePassword()" />
             <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+            <!-- Password validation feedback -->
+            <div id="password-requirements" class="mt-2 text-sm">
+                <p id="length" class="text-gray-600">At least 12 characters</p>
+                <p id="uppercase" class="text-gray-600">At least one uppercase letter</p>
+                <p id="lowercase" class="text-gray-600">At least one lowercase letter</p>
+                <p id="number" class="text-gray-600">At least one number</p>
+                <p id="special" class="text-gray-600">At least one special character</p>
+            </div>
         </div>
 
         <div>
@@ -45,4 +53,23 @@
             @endif
         </div>
     </form>
+
+    <script>
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const requirements = {
+                length: password.length >= 12,
+                uppercase: /[A-Z]/.test(password),
+                lowercase: /[a-z]/.test(password), 
+                number: /[0-9]/.test(password),
+                special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+            };
+
+            document.getElementById('length').style.color = requirements.length ? 'green' : 'gray';
+            document.getElementById('uppercase').style.color = requirements.uppercase ? 'green' : 'gray';
+            document.getElementById('lowercase').style.color = requirements.lowercase ? 'green' : 'gray';
+            document.getElementById('number').style.color = requirements.number ? 'green' : 'gray';
+            document.getElementById('special').style.color = requirements.special ? 'green' : 'gray';
+        }
+    </script>
 </section>
