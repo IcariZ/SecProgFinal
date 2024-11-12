@@ -41,11 +41,13 @@ Route::middleware('guest')->group(function () {
     Route::get('auth/{provider}/callback', [SocialiteController::class, 'callbackSocial'])
         ->name('socialite.callback');
 
+    // 2FA Routes
     Route::get('verify-2fa', function () {
         return view('auth.verify-2fa');
-    })->name('verify.2fa');
+    })->name('verify.2fa.show');
 
-    Route::post('verify-2fa', [RegisteredUserController::class, 'verify2FA']);
+    Route::post('verify-2fa', [RegisteredUserController::class, 'verify2FA'])
+        ->name('verify.2fa');
 });
 
 Route::middleware('auth')->group(function () {
