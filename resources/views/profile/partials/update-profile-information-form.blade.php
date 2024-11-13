@@ -9,9 +9,30 @@
         </p>
     </header>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
+
+        <!-- Profile Picture -->
+        <div>
+            <x-input-label for="profile_picture" :value="__('Profile Picture')" />
+            
+            @if($user->profile_picture)
+                <div class="mt-2">
+                    <img src="{{ asset('storage/' . $user->profile_picture) }}" 
+                         alt="Profile Picture"
+                         class="w-20 h-20 rounded-full object-cover">
+                </div>
+            @endif
+
+            <input type="file" 
+                   id="profile_picture" 
+                   name="profile_picture" 
+                   accept="image/*"
+                   class="mt-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+            
+            <x-input-error class="mt-2" :messages="$errors->get('profile_picture')" />
+        </div>
 
         <div>
             <x-input-label for="name" :value="__('Name')" />

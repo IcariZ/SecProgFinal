@@ -24,6 +24,7 @@ class User extends Authenticatable
         'is_admin',
         'last_activity',
         'ip_address',
+        'profile_picture', // Add this
         'two_factor_token',
         'two_factor_expires_at'
     ];
