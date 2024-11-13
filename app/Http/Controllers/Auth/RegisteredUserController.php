@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'two_factor_token' => Str::random(6),
+            'two_factor_token' => Str::random(12),
             'two_factor_expires_at' => now()->addMinutes(10)
         ]);
 
