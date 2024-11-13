@@ -46,13 +46,13 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'two_factor_token' => Str::random(12),
-            'two_factor_expires_at' => now()->addMinutes(10)
         ]);
 
-        $user->notify(new TwoFactorCode($user->two_factor_token));
+        event(new Registered($user));
 
-        return redirect()->route('verify.2fa')->with('email', $user->email);
+        Auth::login($user);
+
+        return redirect(RouteServiceProvider::HOME);
     }
 
     public function verify2FA(Request $request): RedirectResponse
