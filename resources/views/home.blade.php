@@ -5,7 +5,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <h6 class="text-xl font-bold">Quiz Tester</h6>
+                        <h6 class="text-xl font-bold">PIsang</h6>
                         @forelse($public_quizzes as $quiz)
                             <div class="px-4 py-2 w-full lg:w-6/12 xl:w-3/12">
                                 <div class="flex relative flex-col mb-6 min-w-0 break-words bg-white rounded shadow-lg xl:mb-0">
