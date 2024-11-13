@@ -25,7 +25,7 @@
                             <x-input-label for="options" value="Question options" />
                             @foreach ($options as $index => $option)
                                 <div class="flex mt-2">
-                                    <x-text-input type="text" wire:model.defer="options.{{ $index }}.text"
+                                    <x-text-input wire:model.defer="options.{{ $index }}.text"
                                         class="w-full" name="options_{{ $index }}"
                                         id="options_{{ $index }}" autocomplete="off" />
 
@@ -40,9 +40,8 @@
                                 </div>
                                 <x-input-error :messages="$errors->get('options.' . $index . '.text')" class="mt-2" />
                             @endforeach
-
+                            <!-- Add general options error message -->
                             <x-input-error :messages="$errors->get('options')" class="mt-2" />
-
                             <x-primary-button wire:click="addOption" type="button" class="mt-2">
                                 Add
                             </x-primary-button>

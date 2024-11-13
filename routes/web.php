@@ -53,10 +53,9 @@ Route::middleware('auth')->group(function () {
 
         Route::get('admins', AdminList::class)->name('admins');
         Route::get('admins/create', AdminForm::class)->name('admin.create');
-
+        Route::get('users', App\Http\Livewire\Admin\UserList::class)->name('users');
         Route::get('tests', TestList::class)->name('tests');
     });
 });
-
 
 require __DIR__ . '/auth.php';

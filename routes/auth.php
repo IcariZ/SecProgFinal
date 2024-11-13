@@ -40,20 +40,17 @@ Route::middleware('guest')->group(function () {
 
     Route::get('auth/{provider}/callback', [SocialiteController::class, 'callbackSocial'])
         ->name('socialite.callback');
+
+    // 2FA Routes
+    Route::get('verify-2fa', function () {
+        return view('auth.verify-2fa');
+    })->name('verify.2fa.show');
+
+    Route::post('verify-2fa', [RegisteredUserController::class, 'verify2FA'])
+        ->name('verify.2fa');
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('verify-email', EmailVerificationPromptController::class)
-                ->name('verification.notice');
-
-    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
-                ->middleware(['signed', 'throttle:6,1'])
-                ->name('verification.verify');
-
-    Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-                ->middleware('throttle:6,1')
-                ->name('verification.send');
-
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
                 ->name('password.confirm');
 
@@ -63,4 +60,16 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+                
+    // Route::get('email/verify', [EmailVerificationPromptController::class, '__invoke'])
+    //     ->middleware('auth')
+    //     ->name('verification.notice');
+
+    // Route::get('email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
+    //     ->middleware(['auth', 'signed', 'throttle:6,1'])
+    //     ->name('verification.verify');
+
+    // Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+    //     ->middleware(['auth', 'throttle:6,1'])
+    //     ->name('verification.send');
 });

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,9 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
-        'facebook_id',
-        'google_id',
-        'github_id',
+        'last_activity',
+        'ip_address',
+        'two_factor_token',
+        'two_factor_expires_at'
     ];
 
     /**
@@ -43,6 +45,9 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'last_activity' => 'datetime',
+        'two_factor_expires_at' => 'datetime'
     ];
 
     public function tests()
@@ -53,5 +58,12 @@ class User extends Authenticatable
     public function scopeAdmin($query)
     {
         $query->where('is_admin', true);
+    }
+
+    public function updateLastActivity()
+    {
+        $this->last_activity = now();
+        $this->ip_address = request()->ip();
+        $this->save();
     }
 }
