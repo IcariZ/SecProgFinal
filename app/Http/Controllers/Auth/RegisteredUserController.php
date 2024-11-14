@@ -54,36 +54,4 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
-
-    public function verify2FA(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'two_factor_token' => 'required|string',
-            'email' => 'required|email'
-        ]);
-
-        $user = User::where('email', $request->email)
-                    ->where('two_factor_token', $request->two_factor_token)
-                    ->where('two_factor_expires_at', '>', now())
-                    ->first();
-
-        if (!$user) {
-            return back()->withErrors(['two_factor_token' => 'Invalid or expired code.']);
-        }
-
-        // Clear 2FA tokens
-        $user->two_factor_token = null;
-        $user->two_factor_expires_at = null;
-        $user->email_verified_at = now(); // Mark email as verified
-        $user->save();
-
-        // Log the user in
-        Auth::login($user);
-
-        // Clear session data
-        session()->forget('email');
-
-        // Redirect to home with intended URL
-        return redirect()->intended(RouteServiceProvider::HOME);
-    }
 }

@@ -24,9 +24,7 @@ class User extends Authenticatable
         'is_admin',
         'last_activity',
         'ip_address',
-        'profile_picture', // Add this
-        'two_factor_token',
-        'two_factor_expires_at'
+        'profile_picture'
     ];
 
     /**
@@ -47,8 +45,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'last_activity' => 'datetime',
-        'two_factor_expires_at' => 'datetime'
+        'last_activity' => 'datetime'
     ];
 
     public function tests()
