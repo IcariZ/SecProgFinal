@@ -106,6 +106,8 @@ class UserList extends Component
 
     public function getSessionTimeLeft(User $user): string 
     {
+        abort_if(!auth()->user()->is_admin, Response::HTTP_FORBIDDEN, 403);
+
         // Get session lifetime from config (in minutes)
         $lifetime = config('session.lifetime', 120);
         
@@ -131,6 +133,8 @@ class UserList extends Component
 
     public function isUserOnline(User $user): bool
     {
+        abort_if(!auth()->user()->is_admin, Response::HTTP_FORBIDDEN, 403);
+
         if (!$user->last_activity) {
             return false;
         }
