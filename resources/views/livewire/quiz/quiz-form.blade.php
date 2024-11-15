@@ -43,19 +43,18 @@
                         </div>
 
                         <div class="mt-4">
-                            <div class="flex items-center">
-                                <x-input-label for="published" value="Published" />
-                                <input type="checkbox" id="published" class="mr-1 ml-2" wire:model="quiz.published">
+                            <x-input-label value="Status" />
+                            <div class="flex items-center mt-2">
+                                <label class="mr-4">
+                                    <input type="radio" name="status" wire:model="status" value="published">
+                                    Published
+                                </label>
+                                <label>
+                                    <input type="radio" name="status" wire:model="status" value="public">
+                                    Public
+                                </label>
                             </div>
-                            <x-input-error :messages="$errors->get('quiz.published')" class="mt-2" />
-                        </div>
-
-                        <div class="mt-4">
-                            <div class="flex items-center">
-                                <x-input-label for="public" value="Public" />
-                                <input type="checkbox" id="public" class="mr-1 ml-2" wire:model="quiz.public">
-                            </div>
-                            <x-input-error :messages="$errors->get('quiz.public')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('status')" class="mt-2" />
                         </div>
 
                         <div class="mt-4">

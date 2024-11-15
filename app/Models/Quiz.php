@@ -33,13 +33,13 @@ class Quiz extends Model
         return $this->belongsToMany(Question::class);
     }
 
-    public function scopePublic($q)
+    public function scopePublic($query)
     {
-        return $q->where('public', true);
+        return $query->where('public', 1);
     }
 
-    public function scopePublished($q)
+    public function scopePublished($query) 
     {
-        return $q->where('published', true);
+        return $query->where('published', 1);
     }
 }

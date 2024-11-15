@@ -8,10 +8,22 @@ class HomeController extends Controller
 {
     public function index()
     {
+        // Original query that incorrectly filters public quizzes
         $query = Quiz::whereHas('questions')
             ->withCount('questions')
             ->when(auth()->guest() || !auth()->user()->is_admin, function ($query) {
-                return $query->where('published', 1);
+                return $query->where('published', 1); // This restricts visibility
+            })
+            ->get();
+
+        // Modified query to show public quizzes to everyone
+        $query = Quiz::whereHas('questions')
+            ->withCount('questions')
+            ->when(auth()->guest() || !auth()->user()->is_admin, function ($query) {
+                return $query->where(function($q) {
+                    $q->where('published', 1)
+                      ->orWhere('public', 1); // Allow public quizzes to be visible
+                });
             })
             ->get();
 

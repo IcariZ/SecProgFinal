@@ -24,17 +24,19 @@ class Show extends Component
 
     public int $startTimeInSeconds = 0;
 
+    public bool $alreadyAttempted = false;
+
     public function mount()
     {
-        // Check if user has already taken this quiz
         if (auth()->check()) {
             $hasAttempted = Test::where('quiz_id', $this->quiz->id)
                                ->where('user_id', auth()->id())
                                ->exists();
             
             if ($hasAttempted) {
-                session()->flash('error', 'You have already taken this quiz. You can only take it once.');
-                return redirect()->route('home');
+                // Instead of redirect, set an error property
+                $this->alreadyAttempted = true;
+                return;
             }
         }
 

@@ -2,43 +2,44 @@
 
 namespace App\Http\Livewire\Quiz;
 
-use App\Models\Question;
 use App\Models\Quiz;
-use Illuminate\Contracts\View\View;
+use App\Models\Question;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Illuminate\Contracts\View\View;
 
 class QuizForm extends Component
 {
     public Quiz $quiz;
-
     public array $questions = [];
-
     public bool $editing = false;
-
     public array $listsForFields = [];
+    public $status;
 
-    protected $rules = [
-        'quiz.title' => 'required|string',
-        'quiz.slug' => 'string',
-        'quiz.description' => 'nullable|string',
-        'quiz.published' => 'boolean',
-        'quiz.public' => 'boolean',
-        'questions' => 'nullable|array',
-    ];
+    protected function rules()
+    {
+        return [
+            'quiz.title' => 'required|string',
+            'quiz.slug' => 'string',
+            'quiz.description' => 'nullable|string',
+            'status' => 'required|in:published,public',
+            'questions' => 'nullable|array',
+        ];
+    }
 
     public function mount(Quiz $quiz)
     {
         $this->quiz = $quiz;
-
         $this->initListsForFields();
 
         if ($this->quiz->exists) {
             $this->editing = true;
             $this->questions = $this->quiz->questions()->pluck('id')->toArray();
+            $this->status = $this->quiz->published ? 'published' : ($this->quiz->public ? 'public' : null);
         } else {
             $this->quiz->published = false;
             $this->quiz->public = false;
+            $this->status = 'published';
         }
     }
 
@@ -51,8 +52,10 @@ class QuizForm extends Component
     {
         $this->validate();
 
-        $this->quiz->save();
+        $this->quiz->published = $this->status === 'published';
+        $this->quiz->public = $this->status === 'public';
 
+        $this->quiz->save();
         $this->quiz->questions()->sync($this->questions);
 
         return to_route('quizzes');
