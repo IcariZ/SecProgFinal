@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('result')->nullable();
             $table->string('ip_address')->nullable();
             $table->integer('time_spent')->nullable();
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('quiz_id')->nullable()->constrained();
             $table->timestamps();
             $table->softDeletes();
