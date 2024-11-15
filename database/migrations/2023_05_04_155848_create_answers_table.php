@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->boolean('correct')->default(0);
-            $table->foreignId('user_id')->nullable()->constrained();
-            $table->foreignId('test_id')->nullable()->constrained();
-            $table->foreignId('question_id')->nullable()->constrained();
-            $table->foreignId('option_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('test_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('question_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('option_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
