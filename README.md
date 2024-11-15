@@ -1,98 +1,104 @@
-# Laravel Quiz System
+# 🍌 PIsang - Cybersecurity Quiz Platform
+> Pertanyaan Informasi Security Antar Generasi
 
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+<!-- flag{th3_f1rst_fl4g_1s_h3r3} -->
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+## 🎯 Overview
+PIsang is a secure quiz system designed to test and enhance your cybersecurity knowledge. Can you find all the hidden challenges while learning?
 
-## Overview
+## 🔐 Features
 
-This quiz system allows users to participate in quizzes, view their results, and compete on leaderboards.
+### Security Features
+- Multi-factor Authentication
+- XSS Protection
+- CSRF Protection
+- SQL Injection Prevention
+- Input Validation
+- Secure Session Management
+- Hidden Security Challenges
 
-## Database Schema
+### User Features 
+- Social Login Integration
+- Interactive Quiz System
+- Progress Tracking
+- Performance Analytics
+- Achievement System
 
-![image](https://github.com/kareemaladawy/laravel-quiz-system/assets/62149929/0f00b4e8-74b5-45e3-852c-d1980122e13e)
+## 🛠️ Tech Stack
+- PHP 8+
+- Laravel 10.18+
+- Livewire 3
+- MySQL
+- Composer
 
-## Features
+## ⚙️ Installation Steps
 
-#### Admin Features
-
--   Manage other admins
--   Manage quizzes
--   Manage questions and options
--   View all the tests taken on the system
-
-#### User Features
-
--   Log in and register
--   Participate in quizzes as a guest or registered user
--   View a specific quiz's results and leaderboard
--   View the overall leaderboard, which ranks all users based on their test results
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-#### Prerequisites
-
--   Composer dependency manager
--   PHP 8+
--   Laravel 10.18+
--   Livewire 3
-
-#### Installation
-
-1- Clone the project
-
-```
-git clone https://github.com/kareemaladawy/laravel.git
+1. Clone the project
+```bash
+git clone https://github.com/IcariZ/SecProgFinal.git
+# Hint: Always check repository contents carefully
 ```
 
-2- Install the dependencies
-
-```
+2. Install dependencies
+```bash
 composer install
 ```
 
-3- Configure the environment:
-
-```
+3. Configure environment
+```bash
 cp .env.example .env
-```
-
-4- Generate the application key:
 
 ```
+
+4. Generate application key
+```bash
 php artisan key:generate
 ```
 
-5- Migrate the database:
-
-```
+5. Migrate database
+```bash
 php artisan migrate --seed
-```
-
-6- Start the development server:
 
 ```
+
+6. Start development server
+```bash
 php artisan serve
 ```
 
-## Running Tests
-
-To run tests, run the following command
-
+## 📊 Database Schema
 ```
-  php artisan test
+├── quizzes
+│   ├── id
+│   ├── title
+│   ├── description
+│   └── published
+│
+├── questions
+│   ├── id
+│   ├── content
+│   └── explanation
+│
+├── options
+│   ├── id
+│   ├── text
+│   └── correct
+│
+└── users
+    ├── id
+    ├── name
+    ├── email
+    └── remember_token
 ```
-## Screenshots
 
-<a href="https://github.com/kareemaladawy/laravel-quiz-system/issues/1">Admin Screenshots</a> <br>
-<a href="https://github.com/kareemaladawy/laravel-quiz-system/issues/2">User Screenshots</a>
+## 🚀 Project Status
+- Version: 1.0.0
+- Type: Academic Project / CTF Learning Platform
+- Course: Secure Programming
 
-## Authors
+---
 
--   [@kareemalaadwy](https://www.github.com/kareemalaadwy)
-
-## Contributing
-
-Contributions are always welcome!
+> 🎓 Developed for Secure Programming course
+> 
+> Repository: [SecProgFinal](https://github.com/IcariZ/SecProgFinal)
+<!-- flag{y0rm0m_h4h4h4h4_13194h1s} -->
