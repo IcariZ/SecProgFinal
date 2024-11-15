@@ -26,6 +26,15 @@
 
             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
                 autocomplete="new-password" oninput="validatePassword()" />
+            
+            <!-- <input type="checkbox" onclick="togglePassword()">Show Password -->
+            <div class="block mt-4">
+                <label for="show_password" class="inline-flex items-center">
+                    <input id="show_password" type="checkbox" onclick="togglePassword()"
+                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="show_password">
+                    <span class="ml-2 text-sm text-gray-600">Show Password</span>
+                </label>
+            </div>
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
@@ -45,6 +54,15 @@
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
                 name="password_confirmation" required autocomplete="new-password" />
+            
+            <!-- <input type="checkbox" onclick="togglePasswordConf()">Show Password -->
+            <div class="block mt-4">
+                <label for="show_password" class="inline-flex items-center">
+                    <input id="show_password" type="checkbox" onclick="togglePasswordConf()"
+                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="show_password">
+                    <span class="ml-2 text-sm text-gray-600">Show Password</span>
+                </label>
+            </div>
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
@@ -79,6 +97,31 @@
             document.getElementById('lowercase').style.color = requirements.lowercase ? 'green' : 'gray';
             document.getElementById('number').style.color = requirements.number ? 'green' : 'gray';
             document.getElementById('special').style.color = requirements.special ? 'green' : 'gray';
+        }
+
+        function togglePassword() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+
+            // var x = document.getElementById("password_confirmation");
+            // if (x.type === "password") {
+            //     x.type = "text";
+            // } else {
+            //     x.type = "password";
+            // }
+        }
+
+        function togglePasswordConf() {
+            var x = document.getElementById("password_confirmation");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
         }
     </script>
 </x-guest-layout>
